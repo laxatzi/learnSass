@@ -22,6 +22,10 @@ body {
 
     #{&}_paragraph {  //use of ampersand for 'main' -- with interpolation
         font-weight: map-get($font-weights, bold);
+
+        &:hover {
+            color: $accent-color;
+        }
     }
 }
 
