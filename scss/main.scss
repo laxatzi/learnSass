@@ -24,9 +24,11 @@
      }
  }
 
- @mixin mobile() {
+ @mixin mobile {
      @media (max-width: $mobile){
-         @content 
+         //In addition to taking arguments, a mixin can take an entire block of styles, known as a content block.
+         //  A mixin can declare that it takes a content block by including the @content at-rule in its body.
+        @content; 
      }
  }
 // styles
@@ -39,18 +41,28 @@ body {
 
 // demonstrate nesting
 .main {
-    @include flexCenter(column);
-    width: 80%;
+    @include flexCenter(row);
+    width: 80%-40%;
     margin: 0 auto;
     
-    #{&}_paragraph {  //use of ampersand for 'main' -- with interpolation
+    #{&}_paragraph1 {  //use of ampersand for 'main' -- with interpolation
         font-weight: weight(bold);
-
+        
         &:hover {
             color: $accent-color;
         }
     }
-}
+
+    #{&}_paragraph2 {
+        @extend .main_paragraph1;
+        font-weight: weight(regular);
+    }
+
+   @include mobile{
+        flex-direction: column;
+   }
+
+}// end main
 
 // obsolete
 // .main p {
