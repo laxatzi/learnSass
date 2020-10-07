@@ -1,12 +1,18 @@
 // imports
 @import './resets/';
 @import './variables.scss';
+// functions
+@function weight($weight-name){
+    // The map module makes it possible to look up the value associated with a key in a map.
+   // map-get($map, $key) function returns these value
+    @return map-get($font-weights, $weight-name);
+}
+
 body {
     background-color: $primary-color;
     color: $text-color;
-    // The map module makes it possible to look up the value associated with a key in a map.
-   // map-get($map, $key) function returns these value
-    font-weight: map-get($font-weights , regular);
+    
+    font-weight: weight(regular);
 }
 
 // demonstrate nesting
@@ -15,7 +21,7 @@ body {
     margin: 0 auto;
 
     #{&}_paragraph {  //use of ampersand for 'main' -- with interpolation
-        font-weight: map-get($font-weights, bold);
+        font-weight: weight(bold);
 
         &:hover {
             color: $accent-color;
