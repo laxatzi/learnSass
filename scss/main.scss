@@ -1,13 +1,29 @@
 // imports
-@import './resets/';
-@import './variables.scss';
+@import './_resets/';
+@import './_variables.scss';
+
 // functions
 @function weight($weight-name){
     // The map module makes it possible to look up the value associated with a key in a map.
    // map-get($map, $key) function returns these value
     @return map-get($font-weights, $weight-name);
 }
+// mixins
+ @mixin flexCenter($direction) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $direction;
 
+ }
+
+ @mixin theme($light-theme: true){
+     @if $light-theme{
+         background: lighten($primary-color, 100%);
+         color: darken($text-color, 100%);
+     }
+ }
+// styles
 body {
     background-color: $primary-color;
     color: $text-color;
@@ -17,12 +33,10 @@ body {
 
 // demonstrate nesting
 .main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexCenter(column);
     width: 80%;
     margin: 0 auto;
-
+    
     #{&}_paragraph {  //use of ampersand for 'main' -- with interpolation
         font-weight: weight(bold);
 
@@ -36,3 +50,7 @@ body {
 // .main p {
 
 // }
+
+.light {
+    @include theme($light-theme: true);
+}
